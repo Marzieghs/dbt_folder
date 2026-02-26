@@ -18,14 +18,14 @@ group by airport_code, dest_airport_code
     rs.dest_code,
     
     -- Origin Airport Details (from the 'orig' join)
-    orig.name AS origin_airport_name,
-    orig.city AS origin_city,
-    orig.country AS origin_country,
+    orig.name as origin_airport_name,
+    orig.city as origin_city,
+    orig.country as origin_country,
     
     -- Destination Airport Details (from the 'dest' join)
-    dest.name AS dest_airport_name,
-    dest.city AS dest_city,
-    dest.country AS dest_country,
+    dest.name as dest_airport_name,
+    dest.city as dest_city,
+    dest.country as dest_country,
     
     -- Metrics
     rs.total_flights,
@@ -39,6 +39,6 @@ group by airport_code, dest_airport_code
     rs.total_diverted
 from route_stats as rs
 left join {{ ref('prep_airports') }} as orig 
-on pa.faa = rs.airport_code
+on orig.faa = rs.airport_code
 LEFT JOIN {{ ref('prep_airports') }} as dest 
 ON rs.dest_airport_code = dest.faa
